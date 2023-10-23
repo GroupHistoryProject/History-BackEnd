@@ -5,3 +5,5 @@
 [echo](https://github.com/labstack/echo)
 
 [postgres + go](https://github.com/lib/pq)
+
+[project layout](https://github.com/golang-standards/project-layout)

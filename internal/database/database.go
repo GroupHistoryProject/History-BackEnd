@@ -11,7 +11,7 @@ import (
 func AddUser(name, surname, login, password string) {
 	loginHash := md5.Sum([]byte(login))
 	passwordHash := md5.Sum([]byte(password))
-	connStr := "user =  password = dbname =  sslmode=disable"
+	connStr := "user = postgres password = '123456' dbname = historyback sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
@@ -22,6 +22,19 @@ func AddUser(name, surname, login, password string) {
 		log.Fatal(err)
 	}
 	_, err = db.Exec(`INSERT INTO logindata(hashlogin, hashpassword) VALUES ($1, $2)`, hex.EncodeToString(loginHash[:]), hex.EncodeToString(passwordHash[:]))
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func DeleteUser(login string) {
+	loginHash := md5.Sum([]byte(login))
+	connStr := "user = postgres password = '123456' dbname = historyback sslmode=disable"
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = db.Exec(`DELETE FROM userdata WHERE hashlogin = $1`, hex.EncodeToString(loginHash[:]))
 	if err != nil {
 		log.Fatal(err)
 	}

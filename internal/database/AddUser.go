@@ -9,7 +9,7 @@ func AddUser(name, surname, login, password string) bool {
 
 	db, err := sql.Open("mysql", "root:FuFa2020@tcp(127.0.0.1:3306)/HistoryProject")
 	if err != nil {
-		panic(err.Error())
+		log.Fatal(err)
 	}
 	defer db.Close()
 

@@ -14,7 +14,7 @@ func startregistration() {
 	tpl, err = template.ParseGlob("templates/*.html")
 	if err != nil {
 		fmt.Println("Parsing Templates Error:")
-		panic(err.Error)
+		log.Fatal(err)
 	}
 
 	http.HandleFunc("/register", registerHandler)
